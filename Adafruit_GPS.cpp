@@ -362,6 +362,18 @@ void Adafruit_GPS::begin(uint32_t baud)
   delay(10);
 }
 
+void Adafruit_GPS::end()
+{
+#ifdef __AVR__
+  if(gpsSwSerial) 
+    gpsSwSerial->end();
+  else 
+#endif
+    gpsHwSerial->end();
+
+  delay(10);
+}
+
 void Adafruit_GPS::sendCommand(const char *str) {
 #ifdef __AVR__
   if(gpsSwSerial) 
